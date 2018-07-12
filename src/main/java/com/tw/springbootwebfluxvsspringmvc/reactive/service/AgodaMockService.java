@@ -3,18 +3,25 @@ package com.tw.springbootwebfluxvsspringmvc.reactive.service;
 import com.tw.springbootwebfluxvsspringmvc.domain.Rate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.stream.Stream;
 
 @Service
-public class AgodaMockService implements MockRateService{
+public class AgodaMockService implements MockRateService {
 
-    public Flux<Rate> getResponse(){
+    public Flux<Rate> getResponse() {
 
         return Flux.fromStream(Stream.of(
-                new Rate("SUPER DELUX", (double) 1200),
-                new Rate("DELUX", (double) 1000)
-        ));
+                new Rate("AGODA SUPER DELUX", (double) 1200),
+                new Rate("AGODA DELUX", (double) 1000)
+        )).delayElements(Duration.ofSeconds(3));
+    }
+
+    @Override
+    public Mono<Rate> getRateByHotel(String hotelCode) {
+        return Mono.just(new Rate("AGODA SUPER DELUX", (double) 1200));
     }
 
 }

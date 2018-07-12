@@ -3,6 +3,10 @@ package com.tw.springbootwebfluxvsspringmvc.domain;
 public class Rate {
     private String roomType;
     private Double pricePerNight;
+    //Currency,base_rate,tax
+
+    public Rate() {
+    }
 
     public Rate(String roomType, Double pricePerNight) {
         this.roomType = roomType;
