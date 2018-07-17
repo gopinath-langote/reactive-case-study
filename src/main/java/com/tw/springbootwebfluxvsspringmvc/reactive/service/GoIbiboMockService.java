@@ -13,6 +13,7 @@ import static java.time.Duration.ofSeconds;
 
 @Service
 public class GoIbiboMockService implements MockRateService {
+    @Override
     public Flux<Rate> getResponse() {
 
         return Flux.fromStream(Stream.of(

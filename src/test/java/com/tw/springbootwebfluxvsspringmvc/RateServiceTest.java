@@ -2,20 +2,16 @@ package com.tw.springbootwebfluxvsspringmvc;
 
 import com.tw.springbootwebfluxvsspringmvc.domain.Rate;
 import com.tw.springbootwebfluxvsspringmvc.reactive.service.*;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.*;
@@ -58,7 +54,7 @@ public class RateServiceTest {
     @Test
     public void shouldGetCombinedRatesAsFlux() {
 
-        StepVerifier.create(rateService.getRates().collectList())
+        StepVerifier.create(rateService.getRates(hotel_code).collectList())
                 .expectNextMatches(rates -> {
                     assertTrue(rates.containsAll(rateList));
                     return true;

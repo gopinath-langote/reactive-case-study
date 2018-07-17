@@ -16,7 +16,7 @@ public class WebConfig implements WebFluxConfigurer {
     @Bean
     public RouterFunction<ServerResponse> routeGetRates(RateHandler rateHandler) {
         return RouterFunctions
-                .route(RequestPredicates.GET("/reactive/rates"), rateHandler::getRates);
+                .route(RequestPredicates.GET("/reactive/rates/{hotel_code}"), rateHandler::getRates);
 
     }
 }

@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 @Service
 public class AgodaMockService implements MockRateService {
 
+    @Override
     public Flux<Rate> getResponse() {
 
         return Flux.fromStream(Stream.of(

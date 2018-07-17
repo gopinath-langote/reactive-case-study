@@ -17,7 +17,9 @@ public class RateHandler {
     }
 
     public Mono<ServerResponse> getRates(ServerRequest request) {
-        Flux<Rate> shows = this.rateService.getRates();
-        return ServerResponse.ok().body(shows, Rate.class);
+        String hotel_code = request.pathVariable("hotel_code");
+
+        Flux<Rate> rates = this.rateService.getRates(hotel_code);
+        return ServerResponse.ok().body(rates, Rate.class);
     }
 }

@@ -5,10 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -28,9 +24,9 @@ public class RateService {
         this.goIbiboMockService = goIbiboMockService;
     }
 
-    public Flux<Rate> getRates() {
+    public Flux<Rate> getRates(String hotel_code) {
         return Flux
                 .fromStream(Stream.of(this.agodaMockService, this.goIbiboMockService, this.makeMyTripMockService))
-                .flatMap(MockRateService::getResponse);
+                .flatMap(mockRateService -> mockRateService.getRateByHotel(hotel_code));
     }
 }

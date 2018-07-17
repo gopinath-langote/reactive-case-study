@@ -9,9 +9,10 @@ import java.time.Duration;
 import java.util.stream.Stream;
 
 @Service
-public class MakeMyTripMockService implements MockRateService{
+public class MakeMyTripMockService implements MockRateService {
 
-    public Flux<Rate> getResponse(){
+    @Override
+    public Flux<Rate> getResponse() {
 
         return Flux.fromStream(Stream.of(
                 new Rate("MMT SUPER DELUX", (double) 1200),
@@ -21,6 +22,7 @@ public class MakeMyTripMockService implements MockRateService{
 
     @Override
     public Mono<Rate> getRateByHotel(String hotelCode) {
+
         return Mono.just(new Rate("MMT SUPER DELUX", (double) 1200));
     }
 

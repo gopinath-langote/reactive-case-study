@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -37,7 +36,7 @@ public class RateControllerTest {
 	@Before
 	public void setup(){
 		RateService rateServiceMock = mock(RateService.class);
-		when(rateServiceMock.getRates()).thenReturn(Flux.just(
+		when(rateServiceMock.getRates(hotel_code)).thenReturn(Flux.just(
 				new Rate("GOIBIBO SUPER DELUX", (double) 1200)
 
 		));
