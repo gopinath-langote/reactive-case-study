@@ -16,7 +16,7 @@ public class AgodaMockService implements MockRateService {
         return Flux.fromStream(Stream.of(
                 new Rate("AGODA SUPER DELUX", (double) 1200),
                 new Rate("AGODA DELUX", (double) 1000)
-        )).delayElements(Duration.ofSeconds(3));
+        )).delayElements(Duration.ofMillis(100));
     }
 
     @Override

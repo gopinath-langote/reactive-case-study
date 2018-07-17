@@ -16,7 +16,7 @@ public class MakeMyTripMockService implements MockRateService{
         return Flux.fromStream(Stream.of(
                 new Rate("MMT SUPER DELUX", (double) 1200),
                 new Rate("MMT DELUX", (double) 1000)
-        )).delayElements(Duration.ofSeconds(2));
+        )).delayElements(Duration.ofMillis(100));
     }
 
     @Override
