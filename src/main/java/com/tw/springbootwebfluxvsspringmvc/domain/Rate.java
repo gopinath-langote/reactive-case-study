@@ -1,9 +1,14 @@
 package com.tw.springbootwebfluxvsspringmvc.domain;
 
+import java.text.DecimalFormat;
+
 public class Rate {
+    private String provider;
     private String roomType;
     private Double pricePerNight;
-    //Currency,base_rate,tax
+    private String currency;
+    private Double tax;
+
 
     public Rate() {
     }
@@ -13,6 +18,18 @@ public class Rate {
         this.pricePerNight = pricePerNight;
     }
 
+    public Rate(String provider, String roomType, Double pricePerNight, String currency, Double tax) {
+        this.provider = provider;
+        this.roomType = roomType;
+        this.pricePerNight = pricePerNight;
+        this.currency = currency;
+        this.tax = tax;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
     public String getRoomType() {
         return roomType;
     }
@@ -20,9 +37,18 @@ public class Rate {
     public Double getPricePerNight() {
         return pricePerNight;
     }
-    public String toString(){
 
-        return "Room type: "+roomType+ " Price Per night: "+ pricePerNight;
+    public String getCurrency() {
+        return currency;
+    }
+
+    public Double getTax() {
+        return tax;
+    }
+
+    public String toString() {
+        DecimalFormat dec = new DecimalFormat("#0.00");
+        return "Room type: " + roomType + " Price Per night: " + dec.format(pricePerNight) + currency+ " Tax: "+dec.format(tax)+"%";
     }
 
 }

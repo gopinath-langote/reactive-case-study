@@ -6,7 +6,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface MockRateService {
-    Flux<Rate> getResponse();
 
-    Mono<Rate> getRateByHotel(String hotelCode);
+    Flux<Rate> getRateByHotel(String hotelCode);
 }

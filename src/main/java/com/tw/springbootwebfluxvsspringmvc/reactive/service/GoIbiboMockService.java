@@ -1,31 +1,23 @@
 package com.tw.springbootwebfluxvsspringmvc.reactive.service;
 
 import com.tw.springbootwebfluxvsspringmvc.domain.Rate;
+import com.tw.springbootwebfluxvsspringmvc.reactive.repository.RateRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.ConnectableFlux;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
-import java.time.Duration;
-import java.util.stream.Stream;
-
-import static java.time.Duration.ofSeconds;
 
 @Service
 public class GoIbiboMockService implements MockRateService {
-    @Override
-    public Flux<Rate> getResponse() {
+    @Autowired
+    private RateRepository rateRepository;
 
-        return Flux.fromStream(Stream.of(
-                new Rate("GOIBIBO SUPER DELUX", (double) 1200),
-                new Rate("GOIBIBO DELUX", (double) 1000)
-        )).delayElements(Duration.ofMillis(100));
-
-
+    public GoIbiboMockService(RateRepository rateRepository) {
+        this.rateRepository = rateRepository;
     }
 
     @Override
-    public Mono<Rate> getRateByHotel(String hotelCode) {
-        return Mono.just(new Rate("GOIBIBO SUPER DELUX", (double) 1200));
+    public Flux<Rate> getRateByHotel(String hotelCode) {
+
+        return rateRepository.getRatesByHotel(hotelCode,"GOIBIBO");
     }
 }

@@ -18,6 +18,9 @@ public class WebConfig implements WebFluxConfigurer {
         return RouterFunctions
                 .route(RequestPredicates.GET("/reactive/rates/{hotel_code}"), rateHandler::getRates);
 
+
+
+
     }
 }
 

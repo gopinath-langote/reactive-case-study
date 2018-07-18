@@ -1,7 +1,10 @@
 package com.tw.springbootwebfluxvsspringmvc;
 
 import com.tw.springbootwebfluxvsspringmvc.domain.Rate;
-import com.tw.springbootwebfluxvsspringmvc.reactive.service.*;
+import com.tw.springbootwebfluxvsspringmvc.reactive.service.AgodaMockService;
+import com.tw.springbootwebfluxvsspringmvc.reactive.service.GoIbiboMockService;
+import com.tw.springbootwebfluxvsspringmvc.reactive.service.MakeMyTripMockService;
+import com.tw.springbootwebfluxvsspringmvc.reactive.service.RateService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +16,7 @@ import reactor.test.StepVerifier;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,13 +40,13 @@ public class RateServiceTest {
         GoIbiboMockService goibiboMockService = mock(GoIbiboMockService.class);
 
 
-        when(agodaMockService.getResponse()).thenReturn(Flux.just(
+        when(agodaMockService.getRateByHotel("TAJ")).thenReturn(Flux.just(
                 rateList.get(0)
         ));
-        when(makemyTripMockService.getResponse()).thenReturn(Flux.just(
+        when(makemyTripMockService.getRateByHotel("TAJ")).thenReturn(Flux.just(
                 rateList.get(1)
         ));
-        when(goibiboMockService.getResponse()).thenReturn(Flux.just(
+        when(goibiboMockService.getRateByHotel("TAJ")).thenReturn(Flux.just(
                 rateList.get(2)
         ));
 
@@ -54,7 +56,7 @@ public class RateServiceTest {
     @Test
     public void shouldGetCombinedRatesAsFlux() {
 
-        StepVerifier.create(rateService.getRates(hotel_code).collectList())
+        StepVerifier.create(rateService.getRates("TAJ").collectList())
                 .expectNextMatches(rates -> {
                     assertTrue(rates.containsAll(rateList));
                     return true;
