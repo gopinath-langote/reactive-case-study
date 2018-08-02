@@ -8,26 +8,67 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
+
+
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'scala'
 
 group = 'com.tw'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+
 
 repositories {
 	mavenCentral()
 }
 //AIzaSyDI8enVVtfojKXUvgBEGjn1Qenv8xg2dQg
 
+//configurations.all {
+//	resolutionStrategy {
+//		eachDependency { DependencyResolveDetails details ->
+//			if (details.requested.group == 'io.netty') {
+//				details.useVersion "4.0.56.Final"
+//			}
+//		}
+//	}
+//}
+
+//task loadTest(type: JavaExec) {
+//	dependsOn testClasses
+//	description = "Load Test With Gatling"
+//	group = "Load Test"
+//	classpath = sourceSets.test.runtimeClasspath
+//	jvmArgs = [
+//			"-Dgatling.core.directory.binaries=${sourceSets.test.output.classesDirs.toString()}",
+//			"-Dlogback.configurationFile=${logbackGatlingConfig()}"
+//
+//	]
+//	main = "io.gatling.app.Gatling"
+//	args = [
+//			"--simulation", "SpringWebFluxGatlingTest",
+//			"--results-folder", "${buildDir}/gatling-results",
+//			"--binaries-folder", sourceSets.test.output.classesDirs.toString(),
+//			"--bodies-folder", sourceSets.test.resources.srcDirs.toList().first().toString() + "/gatling/bodies",
+//	]
+//}
+//def logbackGatlingConfig() {
+//	return sourceSets.test.resources.find { it.name == 'logback-gatling.xml'};
+//}
+
+
+
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-webflux')
 	compile group: 'io.projectreactor.ipc', name: 'reactor-netty', version: '0.7.6.RELEASE'
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
+	//testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.3.0'
 }

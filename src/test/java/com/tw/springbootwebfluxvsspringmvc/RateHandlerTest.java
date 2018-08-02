@@ -31,17 +31,7 @@ public class RateHandlerTest {
 	}
 
 
-	@Before
-	public void setup(){
-		RateService rateServiceMock = mock(RateService.class);
-		when(rateServiceMock.getRates("TAJ")).thenReturn(Flux.just(
-				new Rate("GOIBIBO SUPER DELUX", (double) 1200)
 
-		));
-//		webTestClient = WebTestClient
-//				.bindToController(new RateController(rateServiceMock))
-//				.build();
-	}
 
 	@Test
 	public void shouldGetRatesAsFlux() {
@@ -58,6 +48,13 @@ public class RateHandlerTest {
 		webTestClient.get().uri("/reactive/rates/TAJ123", 2).accept(MediaType.APPLICATION_JSON)
 				.exchange().expectStatus().isBadRequest();
 
+	}
+
+	@Test
+	public void whenHotelCodeIsEmpty_thenHandlerFilterFunctionIsApplied() {
+		webTestClient.get().uri("/reactive/rates")
+				.exchange()
+				.expectStatus().isBadRequest();
 	}
 
 }

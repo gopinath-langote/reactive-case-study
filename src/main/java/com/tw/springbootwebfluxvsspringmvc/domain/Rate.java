@@ -1,7 +1,10 @@
 package com.tw.springbootwebfluxvsspringmvc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.text.DecimalFormat;
 
+@JsonIgnoreProperties
 public class Rate {
     private String provider;
     private String roomType;
