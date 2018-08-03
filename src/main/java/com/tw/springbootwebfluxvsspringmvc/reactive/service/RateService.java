@@ -22,7 +22,7 @@ public class RateService {
 
     public Flux<Rate> findRates(String hotel_code) {
 
-        return  WebClient.create("http://localhost:8090/")
+        return  WebClient.create("http://localhost:8500/")
                 .get()
                 .uri("/get_rates/" + hotel_code)
                 .accept(MediaType.APPLICATION_JSON)
